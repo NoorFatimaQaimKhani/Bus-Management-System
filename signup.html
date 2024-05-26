@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-up Page</title>
+    <link href="signup.css" rel="stylesheet" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
+      integrity="sha512-XtPR0FpQetJ9k8F8enpxeE8shJ2fuRg9zOgK6+7AtRt4zCKxv9BtJ2JZ7Vow7UJypt78KPQL0CqtmLOJ4WjUeQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <!-- Include header -->
+    <div id="header"></div>
+
+    <!-- Your sign-up content -->
+    <img
+      class="bg"
+      src="https://d1e00ek4ebabms.cloudfront.net/production/f0726d17-6b8d-4042-b343-34a7bd5e61e9.jpg"
+      alt="bus"
+    />
+    <div class="contain">
+      <center>
+        <h1><u>Sign-Up Here</u></h1>
+        <div id="errorMessages"></div>
+        <form
+          autocomplete="off"
+          id="signupForm"
+          onsubmit="validateForm(); return false;"
+        >
+          <div class="container_signup">
+            <div class="inputclass">
+              username:
+              <input
+                type="text"
+                name="usrnam_name"
+                id="username_signup_id"
+                required
+              />
+              <div id="username-error" class="error-message"></div>
+            </div>
+            <div class="inputclass">
+              email:
+              <input
+                type="email"
+                name="mail_name"
+                id="email_signup_id"
+                required
+              />
+              <div id="email-error" class="error-message"></div>
+            </div>
+            <div class="inputclass">
+              contact no.:
+              <input
+                type="text"
+                name="contct_name"
+                id="contact_signup_id"
+                maxlength="12"
+                minlength="12"
+                required
+              />
+              <div id="contact-error" class="error-message"></div>
+            </div>
+            <div class="inputclass">
+              password:
+              <input
+                type="password"
+                name="pass_name"
+                id="pass-signup_id"
+                onkeyup="checkPasswordStrength()"
+                required
+              />
+              <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="inputclass">
+              <meter max="4" id="password-strength-meter"></meter>
+              <p id="password-strength-text"></p>
+            </div>
+            <div class="inputclass">
+              confirm password:
+              <input
+                type="password"
+                name="cpass_name"
+                id="cpass_signup_id"
+                required
+              />
+              <div id="confirm-password-error" class="error-message"></div>
+            </div>
+          </div>
+          <div class="btnn">
+            <button class="btn_signup" type="submit">SUBMIT</button>
+          </div>
+        </form>
+      </center>
+    </div>
+
+    <!-- Include footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Function to include external HTML file
+      function includeHTML() {
+        var header = document.getElementById("header");
+        var footer = document.getElementById("footer");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            header.innerHTML = this.responseText;
+            footer.innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "header.html", true);
+        xhttp.send();
+      }
+
+      // Call the function to include header and footer
+      includeHTML();
+
+      // Function to validate form
+      function validateForm() {
+        var formData = new FormData(document.getElementById("signupForm"));
+
+        fetch("signup.php", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((errors) => {
+            var errorMessageContainer =
+              document.getElementById("errorMessages");
+            errorMessageContainer.innerHTML = "";
+
+            if (errors.length > 0) {
+              errors.forEach((error) => {
+                errorMessageContainer.innerHTML +=
+                  "<p class='error'>" + error + "</p>";
+                var fieldName = error
+                  .split(":")[0]
+                  .replace(/\s+/g, "-")
+                  .toLowerCase();
+                document.getElementById(fieldName + "-error").innerText = error;
+              });
+            } else {
+              document.getElementById("signupForm").submit();
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

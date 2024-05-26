@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+    <link href="signup.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <!-- Include header -->
+
+    <div class="main-content">
+      <img
+        class="bg"
+        src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+        alt="bus"
+      />
+      <center>
+        <h1><u>Login page</u></h1>
+        <div class="container">
+          <form
+            autocomplete="off"
+            action="login_page.php"
+            method="post"
+            onsubmit="return validate()"
+          >
+            email:
+            <input type="email" name="eml" id="email_id" required /><br /><br />
+            password:
+            <input type="password" name="pass" id="pass_id" required />
+            <div class="btnn">
+              <br /><br />
+              <input class="btn" type="submit" value="LOGIN" />
+            </div>
+          </form>
+          <!-- Display error message -->
+          <p id="error_message"></p>
+          <p id="login_message"></p>
+          <!-- New element to display login message -->
+          <br /><br />
+          <a href="signup.html">New user-Sign Up</a>
+        </div>
+      </center>
+    </div>
+    <footer id="footer"></footer>
+    <!-- Include footer -->
+
+    <script>
+      // Function to include external HTML file for header and footer
+      function includeHTML() {
+        var header = document.getElementById("header");
+        var footer = document.getElementById("footer");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            header.innerHTML = this.responseText;
+            footer.innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "header.html", true);
+        xhttp.send();
+      }
+
+      // Call the function to include header and footer
+      includeHTML();
+
+      function validate() {
+        var email = document.getElementById("email_id").value;
+        var password = document.getElementById("pass_id").value;
+
+        // Simple email validation
+        if (!email.includes("@")) {
+          document.getElementById("error_message").innerText =
+            "Please enter a valid email address.";
+          return false;
+        }
+
+        // Check if password is at least 6 characters long
+        if (password.length < 6) {
+          document.getElementById("error_message").innerText =
+            "Password must be at least 6 characters long.";
+          return false;
+        }
+
+        return true; // Return true to submit the form, false to prevent submission
+      }
+
+      // Function to display login message
+      function displayLoginMessage(message) {
+        var loginMessage = document.getElementById("login_message");
+        loginMessage.innerText = message;
+      }
+
+      // Check if the login message exists in the URL parameters and display it
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("login_message")) {
+        var message = urlParams.get("login_message");
+        displayLoginMessage(message);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+/* Add your CSS styles here */
+body {
+    background-color: #152238;
+    color: #eeb88b; /* Text color */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 3px solid #eeb88b;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #152238;
+}
+
+tr:nth-child(even) {
+    background-color: #152238;
+}
+
+h1 {
+    text-align: center;
+}

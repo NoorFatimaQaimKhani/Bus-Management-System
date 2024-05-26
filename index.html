@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getbus.com</title>
+    <!-- Your home page's CSS file -->
+    <link href="home page.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Include header -->
+    <div id="header"></div>
+
+    <div class="background">
+      <div class="overlay"></div>
+      <img class="bg" src="background2.jpg" alt="bus" />
+    </div>
+    <div class="container">
+      <h1 class="heading">CHOOSE YOUR DESTINATION</h1>
+      <button id="bookBtn" class="book-btn">Book Your Bus</button>
+    </div>
+    <section id="about" class="post-block">
+      <h2>About Us</h2>
+      <p>This is the about us section.</p>
+    </section>
+    <section id="contact" class="post-block">
+      <h2>Contact Info</h2>
+      <p>This is the contact info section.</p>
+    </section>
+    <!-- Include footer -->
+    <footer>
+      <!-- Footer content here -->
+    </footer>
+
+    <script>
+      // Function to fetch and insert HTML content
+      // Function to include external HTML file
+      function includeHTML() {
+        var header = document.getElementById("header");
+        var footer = document.getElementById("footer");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            header.innerHTML = this.responseText;
+            footer.innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "header.html", true);
+        xhttp.send();
+      }
+
+      // Call the function to include header and footer
+      includeHTML();
+
+      // Check if the user is logged in
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      // Add event listener to the "Book Your Bus" button
+      const bookBtn = document.getElementById("bookBtn");
+      bookBtn.addEventListener("click", () => {
+        if (isLoggedIn) {
+          // User is logged in, redirect to booking.html
+          window.location.href = "booking.html";
+        } else {
+          // User is not logged in, show alert or redirect to login page
+          alert("Please log in to book your bus.");
+          // You can also redirect the user to the login page:
+          // window.location.href = 'login.html';
+        }
+      });
+    </script>
+  </body>
+</html>

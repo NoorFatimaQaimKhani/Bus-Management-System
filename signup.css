@@ -1,0 +1,88 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #152238; /* Set background color to match header color */
+    color: white; /* Set text color to white */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.contain {
+    position: relative; /* Set the position to relative */
+    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+    display: flex; /* Use flexbox for vertical alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: flex-end; /* Align content to the bottom of the container */
+}
+
+.bg {
+    width: 100%;
+    height: 50vh; /* Set height to 50% of the viewport height */
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.container_signup {
+    width: 400px; /* Adjust the width of the form container */
+    padding: 32px;
+    background-color: rgba(21, 34, 56, 0.7); /* Background color with transparency */
+    border: 2px solid rgb(206, 156, 156);
+    border-radius: 10px; /* Add rounded corners */
+    box-sizing: border-box;
+    margin-bottom: 50px; /* Add space between image and form */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px; /* Add some space below the headline */
+}
+
+/* Input Styles */
+.inputclass {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Add space between input fields */
+}
+
+.inputclass label {
+    color: #fff; /* Set label color to white */
+    margin-bottom: 5px;
+}
+
+.inputclass input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add rounded corners */
+    box-sizing: border-box;
+    margin-top: 5px; /* Add some space above the input */
+    background-color: rgba(21, 34, 56, 0.7); /* Background color with transparency */
+    color: white; /* Text color */
+}
+
+/* Button Styles */
+.btnn {
+    text-align: center; /* Align button to center */
+}
+
+.btn_signup {
+    width: 150px; /* Set width of the button */
+    padding: 10px; /* Add padding */
+    background-color: #1E90FF; /* Set background color for submit button */
+    color: #fff; /* Set text color to white */
+    border: none;
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add smooth transition */
+}
+
+.btn_signup:hover {
+    background-color: #007FFF; /* Change background color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container_signup {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}
